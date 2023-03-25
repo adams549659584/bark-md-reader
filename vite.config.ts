@@ -4,6 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default (env: ConfigEnv) =>
   defineConfig({
     base: env.command === 'build' ? '/web' : './',
+    // server: {
+    //   proxy: {
+    //     '/web/md': 'https://xxx',
+    //   },
+    // },
     plugins: [
       VitePWA({
         devOptions: {

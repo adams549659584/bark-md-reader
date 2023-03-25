@@ -1,4 +1,6 @@
-import './assets/css/markdown.css';
+import 'modern-css-reset';
+import './assets/css/style.css';
+import 'github-markdown-css';
 import MarkdownIt from 'markdown-it';
 import defaultMdText from '../README.md?raw';
 import { registerSW } from 'virtual:pwa-register';
@@ -6,7 +8,7 @@ import { registerSW } from 'virtual:pwa-register';
 registerSW();
 
 const mdId = window.location.pathname.split('/')[2];
-const appContainer = document.querySelector<HTMLDivElement>('.markdown-section');
+const appContainer = document.querySelector<HTMLDivElement>('.markdown-body');
 const md = new MarkdownIt({
   html: true, // Enable HTML tags in source
   xhtmlOut: false, // Use '/' to close single tags (<br />).
@@ -37,6 +39,8 @@ const md = new MarkdownIt({
 const initMarkdowntHtml = async (mdText = '') => {
   const mdHtml = md.render(mdText || defaultMdText);
   appContainer!.innerHTML = mdHtml;
+  // hide loading
+  document.querySelector('.markdown-load-bg')?.remove();
 };
 
 interface IMarkdownRes {
